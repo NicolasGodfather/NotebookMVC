@@ -7,4 +7,12 @@
 исходный код и ваше резюме на выбранный адрес электронной почты. Приложение должно 
 само ‘найти’ свой исходных код и ваше резюме. Не нужно загружать эти файлы через File Upload форму.
 
-Main tech: Java, Spring MVC/Mail, Hibernate, MySQL, Maven, Git
+Main tech: Java 8, Spring MVC/Mail, Hibernate, MySQL, Tomcat 8, Maven, Git
+
+Для запуска создать БД. Забилдить используя мавен.
+Для отправки сообщений со своей почты (если это gmail), ввести в настройках 
+mvc-dispatcher-servlet.xml - имя и пароль от своей почты, 
+при этом потребуется предоставить доступ к аккаунту 
+Google https://accounts.google.com/b/0/DisplayUnlockCaptcha
+и включить доступ для менее защищенных приложений
+здесь https://www.google.com/settings/security/lesssecureapps
