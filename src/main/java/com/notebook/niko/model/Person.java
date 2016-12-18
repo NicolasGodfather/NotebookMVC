@@ -1,7 +1,10 @@
 package com.notebook.niko.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -17,9 +20,12 @@ public class Person implements Serializable
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Pattern (regexp = "^[а-яА-Яa-zA-Z0-9_]{3,30}$", message = "{name_error}")
+    @NotEmpty
+    @NotNull
     private String name;
-    @Pattern(regexp = "^.{6,30}$", message = "{email_error}")
+    @Email
+    @NotEmpty
+    @NotNull
     private String email;
 
     public Person ()

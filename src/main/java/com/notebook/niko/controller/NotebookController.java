@@ -26,6 +26,7 @@ public class NotebookController
     private static final Logger logger = LoggerFactory.getLogger(NotebookController.class);
     private static final String HOME_PAGE = "homePage";
     private static final String CREATE_PERSON = "createPerson";
+    private static final String REDIRECT_HOME = "redirect:/home";
 
     @Autowired
     private IPersonService iPersonService;
@@ -38,14 +39,14 @@ public class NotebookController
         return HOME_PAGE;
     }
 
-    @RequestMapping (value = "/showCreatePersonPage", method = RequestMethod.GET)
+    @RequestMapping (value = "/creating", method = RequestMethod.GET)
     public String showCreatePersonPage (ModelMap modelMap)
     {
-        modelMap.addAttribute("personForm", new Person());
+        modelMap.addAttribute("person", new Person());
         return CREATE_PERSON;
     }
 
-    @RequestMapping (value = "/createPerson", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping (value = "person", method = RequestMethod.POST)
     public String createPerson (ModelMap modelMap, @Valid @ModelAttribute ("person") Person person,
                                 BindingResult bindingResult) throws ServiceException
     {
@@ -53,11 +54,10 @@ public class NotebookController
         {
             return CREATE_PERSON;
         }
-
         Person newPerson = iPersonService.createPerson(new Person(person.getName(), person.getEmail()));
         modelMap.addAttribute("person", newPerson);
         logger.info("New person successfully created.");
-        return "redirect:/";
+        return REDIRECT_HOME;
     }
 
     @RequestMapping (value = "/deletePerson/{id}")
@@ -65,7 +65,7 @@ public class NotebookController
     {
         this.iPersonService.deletePerson(id);
         logger.info("New person successfully deleted.");
-        return "redirect:/home";
+        return REDIRECT_HOME;
     }
 
 }

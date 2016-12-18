@@ -30,9 +30,12 @@ public class MailController
 {
     private static final Logger logger = LoggerFactory.getLogger(MailController.class);
     private static final String RESULT = "mailSendingResult";
-    private static final String GREETING = "Hi guys! I hope you like my solution =)";
-    private static final String LINK = "/n Here you will see my source code https://github.com/NicolasGodfather/NotebookMVC";
+    private static final String ERROR = "mailSendingError";
     private static final String SUBJECT = "Java Developer";
+    private static final String GREETING = "Hi guys! I hope you like my solution =)";
+    private static final String LINK = "Here you will see my other sharing projects https://github.com/NicolasGodfather";
+    private static final String PATH_FILE = "E:\\JAVA\\TECHTASK\\NotebookMVC\\src\\main\\resources\\private\\CV.doc";
+    private static final String PATH_FILE2 = "E:\\JAVA\\TECHTASK\\NotebookMVC\\src\\main\\resources\\private\\NotebookMVC-master.zip";
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -47,6 +50,7 @@ public class MailController
     @RequestMapping (value = "/sendingData/{id}", method = {RequestMethod.POST, RequestMethod.GET})
     public String sendEmail (@PathVariable ("id") int id)
     {
+
         MimeMessagePreparator preparator = new MimeMessagePreparator()
         {
             @Override
@@ -57,9 +61,13 @@ public class MailController
                     MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
                     messageHelper.setTo(generateEmailById(id));
                     messageHelper.setSubject(SUBJECT);
-                    messageHelper.setText(GREETING + LINK);
-                    FileSystemResource file = new FileSystemResource(new File("E:\\JAVA\\cruds\\NotebookMVC\\src\\main\\resources\\private\\CV.doc"));
+                    messageHelper.setText(GREETING + "\n" + LINK);
+
+                    FileSystemResource file = new FileSystemResource(new File(PATH_FILE));
+                    FileSystemResource file2 = new FileSystemResource(new File(PATH_FILE2));
                     messageHelper.addAttachment(file.getFilename(), file);
+                    messageHelper.addAttachment(file2.getFilename(), file2);
+
                     logger.info("Files successfully attached.");
                 } catch (MessagingException e)
                 {
@@ -67,6 +75,7 @@ public class MailController
                 }
             }
         };
+
         this.javaMailSender.send(preparator);
         logger.info("Email successfully sent.");
 
