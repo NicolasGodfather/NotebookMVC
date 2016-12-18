@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Implementation IPersonService
+ *
  * @author Nicolas Asinovich.
  */
 @Service
@@ -28,11 +29,12 @@ public class PersonService implements IPersonService
         this.iPersonDao = iPersonDao;
     }
 
-    public void createPerson (Person person) throws ServiceException
+    public Person createPerson (Person person) throws ServiceException
     {
         try
         {
             iPersonDao.createPerson(person);
+            return person;
         } catch (DaoException | HibernateException e)
         {
             throw new ServiceException("Error while transaction of createPerson", e);
@@ -72,15 +74,4 @@ public class PersonService implements IPersonService
         }
     }
 
-    @Override
-    public List<Person> findPersonByQuery (String query) throws ServiceException
-    {
-        try
-        {
-            return iPersonDao.findPersonByQuery(query);
-        } catch (DaoException | HibernateException e)
-        {
-            throw new ServiceException("Error while transaction of findPersonByQuery", e);
-        }
-    }
 }

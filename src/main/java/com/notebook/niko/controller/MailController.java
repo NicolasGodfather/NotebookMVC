@@ -22,7 +22,6 @@ import java.io.File;
 
 /**
  * Realization Mail Controller
- *
  * @author Nicolas Asinovich.
  */
 @Controller
@@ -32,7 +31,7 @@ public class MailController
     private static final Logger logger = LoggerFactory.getLogger(MailController.class);
     private static final String RESULT = "mailSendingResult";
     private static final String GREETING = "Hi guys! I hope you like my solution =)";
-    private static final String LINK = "/n Here you will see my source code ";
+    private static final String LINK = "/n Here you will see my source code https://github.com/NicolasGodfather/NotebookMVC";
     private static final String SUBJECT = "Java Developer";
 
     @Autowired
@@ -58,7 +57,7 @@ public class MailController
                     MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
                     messageHelper.setTo(generateEmailById(id));
                     messageHelper.setSubject(SUBJECT);
-                    messageHelper.setText(GREETING);
+                    messageHelper.setText(GREETING + LINK);
                     FileSystemResource file = new FileSystemResource(new File("E:\\JAVA\\cruds\\NotebookMVC\\src\\main\\resources\\private\\CV.doc"));
                     messageHelper.addAttachment(file.getFilename(), file);
                     logger.info("Files successfully attached.");

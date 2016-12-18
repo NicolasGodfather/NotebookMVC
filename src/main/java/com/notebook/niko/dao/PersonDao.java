@@ -36,12 +36,13 @@ public class PersonDao implements IPersonDao
         return this.sessionFactory.getCurrentSession();
     }
 
-    public void createPerson (Person person) throws DaoException
+    public Person createPerson (Person person) throws DaoException
     {
         try
         {
             getSession().save(person);
             logger.info("Person successfully created. Person details: " + person);
+            return person;
         } catch (HibernateException e)
         {
             throw new DaoException(String.format("Creating %s", person), e);
@@ -89,13 +90,4 @@ public class PersonDao implements IPersonDao
         }
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Person> findPersonByQuery (final String query) throws DaoException{
-        Criteria searchCriteria = getSession().createCriteria(Person.class).
-                add(Restrictions.disjunction().
-                add(Restrictions.or(Restrictions.like("name", query + "%"),
-                                    Restrictions.like("email", query + "%"))));
-        return searchCriteria.list();
-    }
 }

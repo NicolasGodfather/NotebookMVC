@@ -7,16 +7,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 
 /**
  * Realization main app controller
- *
  * @author Nicolas Asinovich.
  */
 @Controller
@@ -52,9 +53,9 @@ public class NotebookController
         {
             return CREATE_PERSON;
         }
-        IPersonService iPersonService = this.iPersonService;
-        iPersonService.createPerson(new Person(person.getName(), person.getEmail()));
-        modelMap.addAttribute("person", iPersonService);
+
+        Person newPerson = iPersonService.createPerson(new Person(person.getName(), person.getEmail()));
+        modelMap.addAttribute("person", newPerson);
         logger.info("New person successfully created.");
         return "redirect:/";
     }
@@ -67,12 +68,4 @@ public class NotebookController
         return "redirect:/home";
     }
 
-    //filter
-    @RequestMapping(value = "queryNote")
-    public String findEmployeeByQuery(@RequestParam ("searchControl") String query, Model model) throws ServiceException
-    {
-        model.addAttribute("person", new Person());
-        model.addAttribute("getAllPerson", this.iPersonService.findPersonByQuery(query));
-        return "homePage";
-    }
 }

@@ -13,7 +13,6 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <mvc:resources mapping="/resources/**" location="resources"/>
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven/>
     <context:component-scan base-package="com.notebook.niko.controller"/>
@@ -66,8 +65,6 @@
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />
         <property name="port" value="587" />
-        <property name="username" value="" />
-        <property name="password" value="" />
 
         <property name="javaMailProperties">
             <props>

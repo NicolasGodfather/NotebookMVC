@@ -10,10 +10,8 @@ import java.util.List;
  */
 public interface IPersonService
 {
-    void createPerson (Person person) throws ServiceException;
+    Person createPerson (Person person) throws ServiceException;
     void deletePerson (int id) throws ServiceException;
     Person getPerson(int id) throws ServiceException;
     List<Person> getAllPersons() throws ServiceException;
-    List<Person> findPersonByQuery(String query) throws ServiceException;
-
 }
