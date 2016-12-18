@@ -32,7 +32,7 @@ public class MailController
     private static final String RESULT = "mailSendingResult";
     private static final String ERROR = "mailSendingError";
     private static final String SUBJECT = "Java Developer";
-    private static final String GREETING = "Hi guys! I hope you like my solution =)";
+    private static final String GREETING = "Hi guys! My name is Nikolay. I hope you like my solution =)";
     private static final String LINK = "Here you will see my other sharing projects https://github.com/NicolasGodfather";
     private static final String PATH_FILE = "E:\\JAVA\\TECHTASK\\NotebookMVC\\src\\main\\resources\\private\\CV.doc";
     private static final String PATH_FILE2 = "E:\\JAVA\\TECHTASK\\NotebookMVC\\src\\main\\resources\\private\\NotebookMVC-master.zip";

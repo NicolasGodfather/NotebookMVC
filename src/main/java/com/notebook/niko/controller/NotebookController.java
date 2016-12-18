@@ -64,7 +64,7 @@ public class NotebookController
     public String deletePerson (@PathVariable ("id") int id) throws ServiceException
     {
         this.iPersonService.deletePerson(id);
-        logger.info("New person successfully deleted.");
+        logger.info("Person successfully deleted.");
         return REDIRECT_HOME;
     }
 
