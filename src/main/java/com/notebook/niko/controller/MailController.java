@@ -31,10 +31,11 @@ public class MailController
     private static final Logger logger = LoggerFactory.getLogger(MailController.class);
     private static final String RESULT = "mailSendingResult";
     private static final String ERROR = "mailSendingError";
-    private static final String SUBJECT = "Java Developer";
-    private static final String GREETING = "Hi guys! My name is Nikolay. I hope you like my solution =)";
-    private static final String LINK = "Here you will see my other sharing projects https://github.com/NicolasGodfather";
-    private static final String PATH_FILE = "E:\\JAVA\\TECHTASK\\NotebookMVC\\src\\main\\resources\\private\\CV.doc";
+    private static final String SUBJECT = "Java developer from HTP";
+    private static final String GREETING = "Hi guys! My name is Nikolay. I send this letter via my web-solution.\n";
+    private static final String TEXT = "Please consider my resume and if you need a specialist like me then please contact me! =)\n";
+    private static final String LINK = "I attached my resume and source code this project.\n Here you will see my other sharing projects https://github.com/NicolasGodfather";
+    private static final String PATH_FILE = "E:\\JAVA\\TECHTASK\\NotebookMVC\\src\\main\\resources\\private\\CV.docx";
     private static final String PATH_FILE2 = "E:\\JAVA\\TECHTASK\\NotebookMVC\\src\\main\\resources\\private\\NotebookMVC-master.zip";
 
     @Autowired
@@ -61,7 +62,7 @@ public class MailController
                     MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
                     messageHelper.setTo(generateEmailById(id));
                     messageHelper.setSubject(SUBJECT);
-                    messageHelper.setText(GREETING + "\n" + LINK);
+                    messageHelper.setText(GREETING + TEXT + LINK);
 
                     FileSystemResource file = new FileSystemResource(new File(PATH_FILE));
                     FileSystemResource file2 = new FileSystemResource(new File(PATH_FILE2));

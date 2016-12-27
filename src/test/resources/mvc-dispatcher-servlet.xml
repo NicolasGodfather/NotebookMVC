@@ -15,7 +15,7 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven/>
-    <context:component-scan base-package="com.notebook.niko.controller"/>
+    <context:component-scan base-package="com.notebook.niko"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
